@@ -1,3 +1,4 @@
 A simple BankAccount with a getBalance, withdraw and deposit functionality. 
 The BankAccount is extended by the SavingsAccount class which adds an interestRate.
-This class is extended, by the TimeDepositAccount, where a fee is charged, if the user withdraw during a certain amount of month money of his account. 
+This class is extended, by the TimeDepositAccount, where a fee is charged, if the user withdraw during a certain amount of month money of his account.
+And also a modified bankaccount, where exceptions are thrown if you for example deposit a negative amount.
