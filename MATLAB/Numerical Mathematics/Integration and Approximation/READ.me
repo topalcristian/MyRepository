@@ -1,17 +1,8 @@
 The Task:
-Write Matlab function using divided differences to compute the coefficients ai of the Newton nested
-form of a polynomial interpolation, and to evaluate a polynomial in Newton nested form given the
-coefficients ai and values xi
-.
-Use your method to compute the polynomial interpolants for (xi, yi) and (xi, y˜i) for the following
-data:
-i 0 1 2 3 4 5 6 7 8 9 10
-xi 2.5 2.0 3.0 1.5 3.5 1.0 4.0 0.5 4.5 0.0 5.0
-yi 0.69 0.86 0.54 1.02 0.43 1.19 0.47 1.35 0.79 1.50 1.27
-y˜i 0.65 0.91 0.57 1.03 0.42 1.17 0.44 1.36 0.80 1.52 1.29
-You should display the coefficients of the resulting polynomials, and the table of divided differences
-for interpolant of (xi, yi), and plot the graphs of the polynomials over the interval [−0.1, 5.1].
-It is also recommended to check your answer by evaluating at the xi.
-The data for y is given by a smooth function, and for ˜y by adding random Gaussian noise with
-standard deviation 0.02. Explain your results, paying attention to the interval [0, 0.5]. Comment
-on the suitability of polynomial interpolation in the presence of noise.
+Write a Matlab function to compute the coefficients of the best approximation in the least-squares
+sense over the interval [−π, +π] by a trigonometric polynomial (Fourier series) of degree k.
+
+Also write a Matlab code to evaluate the resulting trigonometric polynomial.
+
+Compute the Fourier coefficients up to degree 6, and plot the sk for k = 1, 2, 3. Use the error formula
+for least-squares approximation by orthogonal functions to give the errors of sk for k = 1, . . . , 6
