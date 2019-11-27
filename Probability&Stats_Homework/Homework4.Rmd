@@ -1,0 +1,134 @@
+---
+title: "Homework4"
+author: "Laurenz Ohnemüller"
+date: "9/29/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+```
+
+Question 1: 
+
+(a)
+
+To find the CDF with a given PDF of X, we have to integrate the PDF:
+
+$$ f_x(x) = 12x^2(1-x) = 12x^2- 12x^3 $$
+that can be done using this formula: 
+
+$$F(x) = P(X \leq x) =  \int_{-\infty}^x f(t)dt =  \int_{0}^x 12t^2- 12t^3 dt  = 4*t^3 - 3*t^4 \Big|_0^x = 4x^3-3x^4$$
+
+
+(b)
+Now we can easily find $P(0<X<0.5)$ using the above calculated CDF $P(X \leq x)$:
+
+$$P(0 < X < 0.5) = F(0.5) - F(0) = (4* 0.5^3-3*0.5^4)-(4* 0^3-3*0^4) = \frac{5}{16}$$
+
+(c)
+We can calculate the mean by using the general way of expressing it and plugging it in our function with our given limits:
+$$E(X) = \int xf_x(x)dx = \int_0^1 x*(12x^2-12x^3) = \int_0^1 12x^3-12x^4 = 3x^4 - 12*\frac{x^5}{5} \big|_0^1= \frac{3}{5} $$
+
+
+To obtain the variance, we have to calculate first $E(X^2)$, which we can do similar to the previous calculation using LOTUS:
+
+$$E(X^2) =  \int_0^1 x^2*(12x^2-12x^3) = \int_0^1 12x^4-12x^5 = \frac{2}{5} $$
+
+Now we use the defintion of the variance: 
+
+$$Var(X) = E(X^2) - E(X)^2 = \frac{2}{5} - (\frac{3}{5})^2 = \frac{1}{25}$$
+
+
+Question 2
+
+First, we want to calculate the CDF of X, so: 
+$$F_x(X) = P(X \leq x)$$
+We can use our definition of X and re-write this as: 
+$$P(max(U_1,..,U_n) \leq x)$$
+and since $U_1,...,U_n$ can be seen as an independet, indetically distributed Uniform distribution, we can observe each $U_n$ indepently and multiply them together later. But before we want to find the CDF: the CDF F(x) = x, because the PDF of a uniform distribution is a constant $c = \frac{1}{b-a}  = \frac{1}{1-0} = 1$ in the case Unif(0,1) and if we integrate our PDF/constant we end up here. As already mentioned, we can now look at them indepentendly :
+$$P(U_1 \leq x), ... ,P(U_n \leq x)$$ and each of them is equal to x.
+So the CDF from 0 to 1 is $x^n$. 
+Now we can easily find the PDF through deriving: 
+
+$$F(x) = x^n;\\ F'(x) = f_x(x) = n*x^{n-1}$$
+and lastly we can find the expected value EX by computing the integral from 0 to 1 of $x*f_x(x)$:
+
+$$E(X) =  \int_0^1 x*f_x(x) = \int_0^1 x*(n*x^{n-1}) = \int_0^1 n*x^n =  n*\int_0^1 x^n = \\ n* \frac{1}{n+1}* x^{n+1}  \Big|_0^1 = \frac{n}{n+1}$$
+
+
+Question 3
+
+
+(a)
+
+The definition of the standard normal CDF $\Phi$ is: 
+
+$$\Phi_y(z) = \int_{-\infty}^z f_y(x)dx$$
+We are looking for the CDF of Y $P(Y \leq z) = P(|X| \leq z)$.
+From this, we can simply see that the CDF equals 0 for $z \leq 0$ , since the absolute value can never be negative. 
+Furthermore, we want to cover the case $z > 0$, where we can re-write this as because X can now also take on negativ values: 
+
+$$P(|X| \leq z) = P(-z \leq X \leq z) = \int_{-z}^z \varphi(x)dx =  \Phi_x(z)-\Phi_x(-z)$$
+Now we can apply an important property of the Normal distribution, which is symmetry: 
+
+$$\Phi(-z) = 1- \Phi_x(z);$$
+and if we plug this inside our calculation, it results in: 
+
+
+$$\Phi_x(z)-\Phi_x(-z) = \Phi_x(z)  - (1-\Phi_x(z)) = 2\Phi_x(z)-1$$
+Lastly, we want to specify X in terms of the standard normal distribution, where we know that for $$ Z\sim N(\mu,\sigma^2)$$,we can say $X = \mu + \sigma Z$. If we rearrange this formula we get $Z = \frac{X-\mu}{\sigma}$. From here we can derive the CDF of X: $\Phi_x(x)=\Phi_z(x)$ and plug it finally in the above standing formula:
+
+$$2\Phi_x(z)-1 = 2\Phi_z(\frac{X-\mu}{\sigma})-1$$
+
+Now we specified the CDF for:
+
+$$z\leq 0: F(Y) = P(|X| \leq z) = 0 $$
+ $$ z>0:F(Y) = P(|X| \leq z) = 2\Phi_x(z)-1 = 2\Phi_z(\frac{X-\mu}{\sigma})-1$$
+
+
+(b)
+
+Now we are supposed to find the PDF of the random variable Y, which we can do by taking the derivative of the CDF of Y.
+
+We know for z>0:
+
+$$F(z) = 0;\\ F'(z) = 0 = f_y(x) $$
+
+furthermore we know that the CDF is not differentiable at z=0. 
+
+Lastly for z < 0: 
+
+$$F(z) = 2*\Phi(z)-1; F'(z) = 2*f_x(z) = f_y(z)$$
+Note here that $\Phi(z)$ is the integrand of $f_x(z)$ and we apply two laws of deriving: \newline
+1. the derivative of a constant is 0 \newline
+2. while deriving the constant factor is not changing. \newline
+To that note, that we use the CDF of Y not in terms of the standard normal distribution, to make it simplier and more observable.
+
+
+(c)
+
+To check if Y is continuos, we will work with limits approaching form $0^+$ and $0^-$. This means that we will let z walk towards 0 from both sides.
+
+
+$$lim_{z\to0^+} f_y(z) = lim_{z \to 0^+} 2*f_x(z) = 2*lim_{z \to 0^+} \frac{1}{\sqrt{2\pi}}*e^{-\frac{z^2}{2}} $$
+We can use that fact that the PDF of Y is twice the PDF of X, which we proved above.
+Here the exponential function $lim_{z \to 0^+} e^{-\frac{z^2}{2}}$ walks towards 1. So we end up with:
+
+$$lim_{z\to0^+} f_y(z) = 2*\frac{1}{\sqrt{2\pi}}$$
+Now lets approach z from $0^-$: 
+
+$$lim_{z\to0^-} f_y(z)  = lim_{z\to0^-} 0 = 0$$
+
+Finally, we can observe that $lim_{z\to0^-} f_y(z) \neq lim_{z\to0^+} f_y(z)$ 
+holds, which proves that $f_y$ can not be continuos at 0. 
+However, this should not be a problem as far as using PDF to find probabilities, since we can define z=0 as an arbitrary variable. 
+
+
+
+
+
+
+

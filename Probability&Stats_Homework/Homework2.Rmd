@@ -1,0 +1,64 @@
+---
+title: "HomeWork2"
+author: "Laurenz Ohnemüller"
+date: "9/14/2019"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+message = FALSE
+```
+
+Question 1
+
+This problem shows a Bernouilli distribution, where if the coins lands HEADS we consider it success and if it lands TAIL a failure. p is the probability that the coin lands HEADS and p-1 is the probability for TAILS.
+
+
+By the law of total probability:
+$$ P(X \leq x) = p*P(X \leq x_{Heads}) + (p-1)*P(X \leq x_{Tails}) $$
+$$   P(X \leq x) = p*F_1(x) + (1-p)*F_2(x) $$
+$$  F(x) = p*F_1(x) + (1-p)*F_2(x) $$
+
+
+
+Question 2
+
+```{r Question2}
+# number of seats in the airplane
+x = 100
+# number of sold tickets
+size = 110
+# probability that a passanger will show up
+prob = 0.9 
+
+# probabilty that every seat will be filled
+# probability that exactly 100 people show up
+p = dbinom(x, size, prob)
+p
+
+# probability that there will be enough seats available
+# probability that at most 100 people show up
+q = pbinom(x, size, prob)
+q
+```
+Since the problem asks for the probability that there will be enough seats for the passengers, I assume that q is the correct answer. However, I also calculated p to show the probability that exactly 100 people show up, such that every seat will be filled. If you only want to know wheather there will be enough seats, you have to calculate the probability that at most 100 people show up (that is q).
+
+
+Question 3 
+(inspired from the Week-Day task)
+
+Yes, it is possible. 
+The examples show that for every given value for p (p=0.9, p=0.99, p=0.9999999999999), we can create two random variables X and Y, such that $$P(X<Y) \geq p$$. 
+Note, that hereby the last example is a prove for each p.
+
+ Let X be a number from 1 to 10, and let Y be a number one higher than X 
+ $$P(X<Y) = 9/10 = 0.9 \geq p$$
+ 
+ Let X be a number from 1 to 10^2, and let Y be a number one higher than X 
+ $$P(X<Y) = (9^2)/(10^2) = 0.99 \geq p$$
+ 
+ Let X be a number from 1 to 10^12, and let Y be a number one higher than X 
+ $$P(X<Y) = (9^12)/(10^12) = 0.9999999999999 \geq p$$
+ 
+X and Y have the same distribution, since Y is equally likely to represent any  number from the specific range as X. 
+ 

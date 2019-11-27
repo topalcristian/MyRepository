@@ -1,0 +1,135 @@
+---
+title: "HomeWork3"
+author: "Laurenz Ohnemüller"
+date: "9/21/2019"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Question 1
+
+The expected value is calculated as follows: 
+ 
+ $$E(x) = \sum_{n=1}^{\infty} x_n*P(X=x_n)$$
+
+  (a)
+  
+If he walks away with the $16,000 than the expected value is \$16,000.
+              
+$$E(X)=16,000*1 = 16,000$$ 
+
+
+  (b)
+  
+He applies his "lifeline" to the 10th question, which means that he increases the probability that he correctly answers the question (by guessing) form 0.25 to 0.5.
+If he answers wrong, he leaves with just $1,000.
+Nevertheless suppose he gets it right, then he moves on to the 11th question, where he has a 0.25 chance of guessing the question correct and than leaving with $64,000. However, his chance of wrongly answering the question is 0.75, where he would leave with \$32,000. Now everything can be calculated together.
+
+
+``` {r Question 1b}
+e_b = 0.5 * 1000 + 0.5 * (0.25*64000 + 0.75*32000)
+e_b
+```
+The expected value is $20,500.
+
+  (c)
+  
+If he applies his lifeline to the 11th question than, his chances of winning the 10th round are 0.25 and of loosing and leaving with $1,000 are 0.75. If he wins the round, then his chances of winning \$64,000 is as high as of leaving with \$32,000, both have the probability of 0.5.
+Now we apply the expected value formula again:
+
+```{r Question 1c}
+e_c = 0.75 * 1000 + 0.25 * (0.5*64000 + 0.5*32000)
+e_c
+```
+The expected value is $12,750.
+
+
+Thus the highest expected value has option b, with $20,500.
+
+
+Question 2
+
+
+(a)
+
+To find the PMF for the random variable X we have to differentiate between k=0 and k>0. 
+
+Lets start with k=0, which can occur in two different ways (as explained in the task).
+
+$$ P(X=0) = p + (1-p)*\frac{\lambda^0}{0!}* e^{-\lambda} = p+(1-p)*e^{-\lambda} $$
+
+If we consider k>0, then: 
+
+$$ P(X=k) = (1-p)*\frac{\lambda^k}{k!}*e^{-\lambda}$$
+Here, we do not add the probability p that HEADS occur, since k>0 can only be achieved by flipping TAILS. 
+
+
+
+(b)
+
+Note that we will compare our results with the results from the previous questions.
+First, we want to show that $(1-I)*Y$ (remember that I is the indicator random variable which can take on the values 0 and 1) equals 0 in two ways, either I = 1 or Y Y = 0 and I = 0. Now create a new random variable Z:
+
+$$P(Z=0) = P(I=1) + P(I=0)*P(Y=0) $$
+
+$$P(Z=0) =  p + (1-p)*\frac{\lambda^0}{0!}* e^{-\lambda} = p+(1-p)*e^{-\lambda} $$
+This equals P(X=0) from the previous question.
+
+Now for $Z>0$, there is only one possible way. Let Y = k (k>0), and I = 0
+
+$$P(Z=k) = p + (1-p)*P(Y=k))$$
+
+$$P(Z=k) =  (1-p)*\frac{\lambda^k}{k!}*e^{-\lambda}$$
+As we can see this corresponds with the previous findings. This proves that X and (1-I)Y have the same PMF and with that the same distribution.
+
+(c)
+
+Using the representation from (b):
+
+$$E(X) = E((1-I)Y) = E(1-I) * E(Y) = (1-p)*\lambda$$
+
+(d)
+
+$$Var(X) = E(X^2) - E(X)^2$$
+From (c) we already know that $E(X) = (1-p)*\lambda$, 
+$$Var(X) = E(X^2) - (1-p)^2*\lambda^2$$
+Now we still need to find $E(X^2)$, where we can use the fact that X has the same distribution as $(1-I)Y$:
+
+$$E(X^2) = E((1-I)^2Y^2) = E((1-I)^2)*E(Y^2) = (1-p)*(\lambda + \lambda^2)$$
+To find $E(Y^2)$, we can just re-formulate the definition of the variance:
+
+$$ E(Y^2) = Var(Y) + E(Y)^2 = \lambda + \lambda^2$$
+
+Finally, we can combine these: 
+
+$$Var(X) = E(X^2) - E(X)^2 = (1-p)*(\lambda + \lambda^2) - (1-p)^2*\lambda^2 $$
+
+
+Question 3
+
+If we take the definition of the expectation: 
+
+$$E(X) = \sum_{k=1}^{\infty} x_k P(X = x_k) $$
+so: 
+$$E(2^X) = \sum_{k=1}^{\infty} 2^kP(X = x_k) $$
+
+
+and the PMF of the Possion distribution: 
+
+$$P(X=k) = e^{-\lambda} * \frac{\lambda^k}{k!}$$
+then we can insert the PMF into the definition of expectation.
+
+$$ E(2^X) = \sum_{k=1}^{\infty} 2^k * \frac{e^{-\lambda} * \lambda^k}{k!}$$
+$$ E(2^X) = e^{-\lambda} \sum_{k=1}^{\infty} 2^k *  \frac{\lambda^k}{k!}$$
+Now we apply the Tailor series:
+
+
+$$ E(2^X) = e^{-\lambda} * e^{2*\lambda} = e^\lambda$$
+This proves that $E(2^x)$ is finite. 

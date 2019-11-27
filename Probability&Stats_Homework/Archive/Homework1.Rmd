@@ -1,0 +1,79 @@
+---
+title: "HomeWork1.rmd"
+author: "Laurenz Ohnemüller"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Question 1: 
+
+(a)
+
+In the famous birthday-match problem, we find ourselfes in a sampling with replacement, which significantly increases the chances of a match. For example, when we have 23 people (with individual birthdays). We can already create (23x22)/2 = 253 possible pairs, due to the sampling with replacement.
+In our case, of the survey taken, we also have a sampling with replacement, which means that we can apply the "birthday-problem formula". It also means that residents can be chosen more than once, like in the birthday problem where people with the same birthday can be picked more than once.
+On the other hand, sampling without replacement would mean that a resident (or a birthday date can be counted) can just be chosen once.
+
+(b)
+
+residents = 1000000
+chosen = 1000
+
+We calculate first the complement:
+
+$q = 1000000!\div (1000000^{1000}*(1000000-1000)!)$
+
+and then subtract it minus one to find the probability we are interested in:
+
+$p = 1-q$
+$p = 0.3933$
+I computed this in Wolfram Alpha, since the numbers were getting to big 
+
+
+
+Question 2: 
+
+We can solve this similar to the first problem:
+
+First, we find the probability that no location has more than one number:
+
+$q_2 = n!/((n^k)*(n-k)!)$
+
+and again, we have to subtract it minus one: 
+
+$p_2 = 1 - q_2$
+
+
+
+
+Question 3: 
+
+(a)
+Intuitively, I would say that $P(A|B)$ is bigger than $P(A|B^\complement)$.
+Peter assumes, that his home will be burglarized before the end of the end of next year. This is why he probably want to install a burglar alarm system, to reduce the chance of being burglarized. If he is not thinking about being burglarized, then the chances of installing a system will not increase.
+
+(b)
+In this case, I think that $P(B|A^\complement)$ is bigger than $P(B|A)$. Since if Peter installs a burglar alarm system ($P(B|A)$) the likelihood of being robbed might reduce. Thats why if he is not installing a system the chances might be bigger. 
+
+(c)
+$P(A|B)>P(A|B^\complement)$ implies that $P(A|B)>P(A)$ for $P(A)>0$ (1) (I think this makes sense). 
+At the same time, $P(A|B) = P(A \cap B)\div P(B)$, which means that 
+$P(A \cap B)\div P(B) > P(A)$. This holds if and only if $P(A \cap B) > P(A) \times P(B)$, which is holds if and only if $P(B) < P(A \cap B) \div P(A)$.
+Hereby, $P(B|A) = P(A \cap B) \div P(A)$ and the outcome is that $P(B|A) > P(B)$, which similarly to (1) means that $P(B|A) > P(B|A^\complement)$ (again provided that $P(A)>0$ and $P(B)>0$).
+This proves that $P(A|B)>P(A|B^\complement)$ is equivalent to $P(B|A) > P(B|A^\complement)$. 
+
+
+(d)
+First, we start considering the case that Peter will install a burglar alarm system before the end of next year, assuming he is burglarized in this time period. People, including me, based their choice on the "real life". We are asking ourselves "What would make more sense?". Nevertheless, our intuiton is getting disproved in (c). Mathematicaly, if Peter installs a system or not, does not change the choice of the burglars, though we might think that the burglars would learn from it. 
+
+
+
+
+
+
+
+
+
+
